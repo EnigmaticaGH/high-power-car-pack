@@ -1,0 +1,51 @@
+{
+"sunburst_skin_sballs": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Spaceballs Livery",
+        "value":1300,
+    }
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_spaceballs",
+}
+
+"sunburst_skin_asiimov": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Asiimov Livery",
+        "value":1300,
+    }
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_asiimov",
+}
+
+"sunburst_skin_waterlem": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Water Elemental Livery",
+        "value":1300,
+    }
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_waterelem",
+}
+
+"sunburst_skin_sao": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Sword Art Online Livery",
+        "value":1300,
+    }
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_sao",
+}
+
+"sunburst_skin_space": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Space Landscape Livery",
+        "value":1300,
+    }
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_space",
+}
+}

@@ -1,0 +1,20 @@
+{
+"etk800_skin_ow_tracer": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Overwatch Tracer Skin",
+        "value":1300,
+    },
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_ow_tracer",
+},
+"etk800_skin_pcmr": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"PC Master Race Skin",
+        "value":1300,
+    },
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_pcmr",
+}
+}

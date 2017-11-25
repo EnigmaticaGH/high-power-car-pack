@@ -1,0 +1,382 @@
+{
+  "sb_super_engine_race_v10": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"4.5L Race V10 Engine",
+          "value":650000,
+      },
+      "slotType" : "super_engine",
+      "slots": [
+          ["type", "default", "description"],
+          ["super_exhaust","super_exhaust", "Exhaust"],
+          ["super_transaxle","super_transaxle_6M_race", "Transaxle"],
+      ],
+      "powertrain": [
+        ["type", "name", "inputName", "inputIndex"],
+        ["combustionEngine", "mainEngine", "dummy", 0],
+      ],
+      "mainEngine":{
+        "torque":[
+          ["rpm", "torque"],
+          [0, 0],
+          [500, 254],
+          [1000, 286],
+          [2000, 325],
+          [3000, 367],
+          [4000, 402],
+          [5000, 451],
+          [6000, 489],
+          [7000, 504],
+          [8000, 520],
+          [9000, 501],
+          [10000, 465],
+        ],
+
+        "idleRPM":1250,
+        "maxRPM":9800,
+        "inertia":0.12,
+        "friction":18,
+        "revLimiterRPMDrop":250,
+        "dynamicFriction":0.055,
+        "burnEfficiency":0.21,
+        "throttleSensitivity":1.25,
+        "torqueReactionNodes:":["e1l","e2l","e4r"],
+        "particulates":0.07,
+        "energyStorage": "mainTank",
+        "requiredEnergyType":"gasoline",
+
+        //cooling and oil system
+        "thermalsEnabled":true,
+        "engineBlockMaterial":"aluminum",
+        "oilVolume":7,
+
+        //engine durability
+        "cylinderWallTemperatureDamageThreshold":160,
+        "headGasketDamageThreshold":1500000,
+        "pistonRingDamageThreshold":1500000,
+        "connectingRodDamageThreshold":2000000,
+
+        //node beam interface
+        "waterDamage": {"[engineGroup]:":["engine_intake"]},
+        "radiator": {"[engineGroup]:":["radiator"]},
+        "engineBlock": {"[engineGroup]:":["engine_block"]},
+        "breakTriggerBeam":"engine",
+
+        "soundConfig": "soundConfig",
+    },
+    "soundConfig": {
+        "sampleName": "V10",
+        "mainGain": -9,
+        "maxLoadMix": 0.6,
+        "minLoadMix": 0,
+        "onLoadGain":1,
+        "offLoadGain":0.65,
+        "eqLowGain": -4,
+        "eqLowFreq": 150,
+        //"eqLowWidth": 0,
+        "eqHighGain": -7,
+        "eqHighFreq": 6000,
+        //"eqHighWidth": 0,
+        //"eqFundamentalGain": -15,
+    },
+    "vehicleController": {
+        "clutchLaunchStartRPM":2400,
+        "clutchLaunchTargetRPM":3300,
+        "lowShiftDownRPM":[0,0,0,4300,5200,5400,5600,5800],
+        "highShiftDownRPM":[0,0,0,4300,5200,5400,5600,5800],
+        "lowShiftUpRPM":8500,
+        "highShiftUpRPM":9600,
+        "revMatchThrottle":0.35,
+    },
+    "flexbodies": [
+       ["mesh", "[group]:", "nonFlexMaterials"],
+       ["super_engine", ["super_engine"]],
+       ["super_header", ["super_engine","super_chassis","super_shocktop_R","super_uppermounts_R","super_lowermounts_R"]],
+    ],
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"selfCollision":false},
+         {"collision":true}
+         //engine box
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+         {"group":"super_engine"},
+         {"engineGroup":"engine_block"}
+         {"nodeWeight":20.9},
+         {"chemEnergy":500,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.12},
+         ["e1r",-0.11, 0.55, 0.31],
+         ["e1l", 0.11, 0.55, 0.31],
+         ["e2r",-0.11, 1.05, 0.31{"isExhaust":true}],
+         ["e2l", 0.11, 1.05, 0.31],
+         {"engineGroup":["engine_block","engine_intake"]}
+         ["e3r",-0.26, 0.55, 0.72],
+         ["e3l", 0.26, 0.55, 0.72],
+         ["e4r",-0.26, 1.05, 0.72],
+         ["e4l", 0.26, 1.05, 0.72],
+         {"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false}
+         //torque reaction node
+         {"nodeWeight":15},
+         ["ta1",0.0, 0.55, 0.425],
+         {"engineGroup":""}
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          {"beamSpring":11200800,"beamDamp":258},
+          {"beamDeform":1120000,"beamStrength":"FLT_MAX"},
+          //engine
+          ["e1r","e1l"],
+          ["e2r","e2l"{"isExhaust":true}],
+          ["e3r","e3l"],
+          ["e4r","e4l"],
+
+          ["e1r","e2r"],
+          ["e1l","e2l"],
+          ["e3r","e4r"],
+          ["e3l","e4l"],
+
+          ["e1r","e3r"],
+          ["e1l","e3l"],
+          ["e2r","e4r"],
+          ["e2l","e4l"],
+
+          ["e2r","e3r"],
+          ["e2l","e3l"],
+          ["e2r","e3l"],
+          ["e2l","e3r"],
+
+          ["e1r","e4r"],
+          ["e1l","e4l"],
+          ["e1r","e4l"],
+          ["e1l","e4r"],
+
+          ["e1r","e2l"],
+          ["e1l","e2r"],
+          ["e3r","e4l"],
+          ["e3l","e4r"],
+
+          ["e1r","e3l"],
+          ["e1l","e3r"],
+          ["e2r","e4l"],
+          ["e2l","e4r"],
+
+          ["ta1","e1l"],
+          ["ta1","e1r"],
+          ["ta1","e2l"],
+          ["ta1","e2r"],
+          ["ta1","e3l"],
+          ["ta1","e3r"],
+          ["ta1","e4l"],
+          ["ta1","e4r"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+  },
+  "sb_super_engine_drag_v10": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"5.2L Drag V10 Engine",
+          "value":720000,
+      },
+      "slotType" : "super_engine",
+      "slots": [
+          ["type", "default", "description"],
+          ["super_exhaust","super_exhaust", "Exhaust"],
+          ["super_transaxle","super_transaxle_6M_race", "Transaxle"],
+      ],
+      "powertrain": [
+        ["type", "name", "inputName", "inputIndex"],
+        ["combustionEngine", "mainEngine", "dummy", 0],
+      ],
+      "mainEngine":{
+        "torque":[
+          ["rpm", "torque"],
+          [0, 0],
+          [500, 420],
+          [1000, 480],
+          [1500, 540],
+          [2000, 570],
+          [2500, 600],
+          [3000, 630],
+          [3500, 660],
+          [4000, 690],
+          [4500, 720],
+          [5000, 750],
+          [5500, 780],
+          [6000, 810],
+          [6500, 840],
+          [7000, 870],
+          [7500, 910],
+          [8000, 950],
+          [8500, 990],
+          [9000, 990],
+          [9500, 950],
+          [10000, 900],
+        ],
+
+        "idleRPM":1250,
+        "maxRPM":9800,
+        "inertia":0.12,
+        "friction":18,
+        "revLimiterRPMDrop":250,
+        "dynamicFriction":0.055,
+        "burnEfficiency":0.21,
+        "throttleSensitivity":1.25,
+        "torqueReactionNodes:":["e1l","e2l","e4r"],
+        "particulates":0.07,
+        "energyStorage": "mainTank",
+        "requiredEnergyType":"gasoline",
+
+        //cooling and oil system
+        "thermalsEnabled":true,
+        "engineBlockMaterial":"aluminum",
+        "oilVolume":7,
+
+        //engine durability
+        "cylinderWallTemperatureDamageThreshold":160,
+        "headGasketDamageThreshold":1500000,
+        "pistonRingDamageThreshold":1500000,
+        "connectingRodDamageThreshold":2000000,
+
+        //node beam interface
+        "waterDamage": {"[engineGroup]:":["engine_intake"]},
+        "radiator": {"[engineGroup]:":["radiator"]},
+        "engineBlock": {"[engineGroup]:":["engine_block"]},
+        "breakTriggerBeam":"engine",
+
+        "soundConfig": "soundConfig",
+    },
+    "soundConfig": {
+        "sampleName": "V10",
+        "mainGain": -6,
+        "maxLoadMix": 0.6,
+        "minLoadMix": 0,
+        "onLoadGain":1,
+        "offLoadGain":0.65,
+        "eqLowGain": -5,
+        "eqLowFreq": 200,
+        //"eqLowWidth": 0,
+        "eqHighGain": 0,
+        "eqHighFreq": 4000,
+        //"eqHighWidth": 0,
+        //"eqFundamentalGain": -15,
+    },
+    "vehicleController": {
+        "clutchLaunchStartRPM":2400,
+        "clutchLaunchTargetRPM":3300,
+        "lowShiftDownRPM":[0,0,0,4300,5200,5400,5600,5800],
+        "highShiftDownRPM":[0,0,0,4300,5200,5400,5600,5800],
+        "lowShiftUpRPM":8500,
+        "highShiftUpRPM":9600,
+        "revMatchThrottle":0.35,
+    },
+    "flexbodies": [
+       ["mesh", "[group]:", "nonFlexMaterials"],
+       ["super_engine", ["super_engine"]],
+       ["super_header", ["super_engine","super_chassis","super_shocktop_R","super_uppermounts_R","super_lowermounts_R"]],
+    ],
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"selfCollision":false},
+         {"collision":true}
+         //engine box
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+         {"group":"super_engine"},
+         {"engineGroup":"engine_block"}
+         {"nodeWeight":20.9},
+         {"chemEnergy":500,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.12},
+         ["e1r",-0.11, 0.55, 0.31],
+         ["e1l", 0.11, 0.55, 0.31],
+         ["e2r",-0.11, 1.05, 0.31{"isExhaust":true}],
+         ["e2l", 0.11, 1.05, 0.31],
+         {"engineGroup":["engine_block","engine_intake"]}
+         ["e3r",-0.26, 0.55, 0.72],
+         ["e3l", 0.26, 0.55, 0.72],
+         ["e4r",-0.26, 1.05, 0.72],
+         ["e4l", 0.26, 1.05, 0.72],
+         {"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false}
+         //torque reaction node
+         {"nodeWeight":15},
+         ["ta1",0.0, 0.55, 0.425],
+         {"engineGroup":""}
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          {"beamSpring":11200800,"beamDamp":258},
+          {"beamDeform":1120000,"beamStrength":"FLT_MAX"},
+          //engine
+          ["e1r","e1l"],
+          ["e2r","e2l"{"isExhaust":true}],
+          ["e3r","e3l"],
+          ["e4r","e4l"],
+
+          ["e1r","e2r"],
+          ["e1l","e2l"],
+          ["e3r","e4r"],
+          ["e3l","e4l"],
+
+          ["e1r","e3r"],
+          ["e1l","e3l"],
+          ["e2r","e4r"],
+          ["e2l","e4l"],
+
+          ["e2r","e3r"],
+          ["e2l","e3l"],
+          ["e2r","e3l"],
+          ["e2l","e3r"],
+
+          ["e1r","e4r"],
+          ["e1l","e4l"],
+          ["e1r","e4l"],
+          ["e1l","e4r"],
+
+          ["e1r","e2l"],
+          ["e1l","e2r"],
+          ["e3r","e4l"],
+          ["e3l","e4r"],
+
+          ["e1r","e3l"],
+          ["e1l","e3r"],
+          ["e2r","e4l"],
+          ["e2l","e4r"],
+
+          ["ta1","e1l"],
+          ["ta1","e1r"],
+          ["ta1","e2l"],
+          ["ta1","e2r"],
+          ["ta1","e3l"],
+          ["ta1","e3r"],
+          ["ta1","e4l"],
+          ["ta1","e4r"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+  },
+  "sb_super_radiator_drag": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"High Performance Drag Radiator",
+          "value":800,
+      },
+      "slotType" : "super_radiator",
+      "flexbodies": [
+           ["mesh", "[group]:", "nonFlexMaterials"],
+           ["super_radiator", ["super_chassis"]],
+      ],
+      "mainEngine":{
+        "radiatorArea":0.6,
+        "radiatorEffectiveness":40000,
+        "coolantVolume":16,
+        "radiatorFanType":"electric",
+        "radiatorFanTemperature":90,
+        "radiatorFanMaxAirSpeed":5,
+        "thermostatTemperature":90
+    },
+    "beams": [
+      ["id1:", "id2:"],
+      {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+  },
+}

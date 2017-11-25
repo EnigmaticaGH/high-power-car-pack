@@ -1,0 +1,408 @@
+{
+"sb_van_engine_v10": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"8.0L V10 Engine",
+        "value":2500,
+    },
+    "slotType" : "van_engine",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["gavril_v8_van", ["van_engine"], [], {"pos":{"x":0, "y":0, "z":0.015}, "rot":{"x":0, "y":0, "z":0}, "scale":{"x":1, "y":1, "z":1}}],
+    ],
+    "slots": [
+        ["type", "default", "description"]
+        ["van_exhaust_v8","van_exhaust_v8", "Exhaust"],
+        ["van_transmission","van_transmission_6A", "Transmission"],
+        ["van_enginetuning","sb_van_enginetuning_stock", "Engine Tuning"],
+    ],
+    "powertrain" : [
+        ["type", "name", "inputName", "inputIndex"],
+        ["combustionEngine", "mainEngine", "dummy", 0],
+    ],
+    "mainEngine": {
+        "torque":[
+          ["rpm", "torque"]
+          [0, 0],
+          [500, 453],
+          [1000, 549],
+          [2000, 609],
+          [2400, 617],
+          [3000, 604],
+          [4000, 582],
+          [5000, 551],
+          [6000, 489],
+          [7000, 391],
+          [8000, 216]
+        ],
+
+        //engine performance
+        "idleRPM":850,
+        "maxRPM":5800,
+        "inertia":0.23,
+        "friction":19,
+        "dynamicFriction":0.035,
+        "burnEfficiency":0.27,
+        "torqueReactionNodes:":["e1l","e2l","e4r"],
+        "particulates":0.052,
+        "energyStorage": "mainTank",
+        "requiredEnergyType":"gasoline",
+
+        //cooling and oil system
+        "thermalsEnabled":true,
+        "engineBlockMaterial":"aluminum",
+        "oilVolume":8,
+
+        //engine durability
+        "cylinderWallTemperatureDamageThreshold":160,
+        "headGasketDamageThreshold":1500000,
+        "pistonRingDamageThreshold":1500000,
+        "connectingRodDamageThreshold":2000000,
+
+        //node beam interface
+        "waterDamage": {"[engineGroup]:":["engine_intake"]},
+        "radiator": {"[engineGroup]:":["radiator"]},
+        "engineBlock": {"[engineGroup]:":["engine_block"]},
+        "breakTriggerBeam":"engine",
+
+        "soundConfig": "soundConfig",
+    },
+    "soundConfig": {
+        "sampleName": "V10",
+        "mainGain": -9,
+        "maxLoadMix": 0.6,
+        "minLoadMix": 0,
+        "onLoadGain":1,
+        "offLoadGain":0.65,
+        "eqLowGain": -4,
+        "eqLowFreq": 150,
+        //"eqLowWidth": 0,
+        "eqHighGain": -7,
+        "eqHighFreq": 6000,
+        //"eqHighWidth": 0,
+        //"eqFundamentalGain": -15,
+    },
+    "vehicleController": {
+        "clutchLaunchStartRPM":1600,
+        "clutchLaunchTargetRPM":2200,
+        //**highShiftDown can be overwritten by automatic transmissions**
+        "highShiftDownRPM":[0,0,0,2600,2850,3050,3150,3150],
+        //**highShiftUp can be overwritten by intake modifications**
+        "highShiftUpRPM":5300
+    },
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"selfCollision":false}
+         {"collision":true}
+         //--4.5L V8 Engine-
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+         {"nodeWeight":28},
+         {"group":"van_engine"},
+         {"engineGroup":"engine_block"}
+         ["e1r", -0.13, -1.14, 0.43,{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.1,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":500,"conductionRadius":0.2}],
+         ["e1l", 0.13, -1.14, 0.43,{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.1,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":500,"conductionRadius":0.2}],
+         ["e2r", -0.13, -1.68, 0.43],
+         ["e2l", 0.13, -1.68, 0.43],
+         {"engineGroup":["engine_block","engine_intake"]}
+         ["e3r", -0.32, -1.14, 0.9],
+         ["e3l", 0.32, -1.14, 0.9],
+         ["e4r", -0.32, -1.68, 0.9{"isExhaust":true}],
+         ["e4l", 0.32, -1.68, 0.9],
+		 {"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"smokePoint":false,"selfIgnitionCoef":false,"baseTemp":false,"conductionRadius":false},
+         {"engineGroup":""}
+
+         {"group":""},
+    ],
+
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          //--ENGINE CUBE--
+          {"beamSpring":12600840,"beamDamp":390},
+          {"beamDeform":142500,"beamStrength":"FLT_MAX"},
+          ["e1r","e1l"],
+          ["e1r","e2r"],
+          ["e1r","e2l"],
+          ["e1r","e3r"],
+          ["e1r","e3l"],
+          ["e1r","e4r"{"isExhaust":true}],
+          ["e1r","e4l"],
+          ["e1l","e2r"],
+          ["e1l","e2l"],
+          ["e1l","e3r"],
+          ["e1l","e3l"],
+          ["e1l","e4r"],
+          ["e1l","e4l"],
+          ["e2r","e2l"],
+          ["e2r","e3r"],
+          ["e2r","e3l"],
+          ["e2r","e4r"],
+          ["e2r","e4l"],
+          ["e2l","e3r"],
+          ["e2l","e3l"],
+          ["e2l","e4r"],
+          ["e2l","e4l"],
+          ["e3r","e3l"],
+          ["e3r","e4r"],
+          ["e3r","e4l"],
+          ["e3l","e4r"],
+          ["e3l","e4l"],
+          ["e4r","e4l"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+    "triangles": [
+            ["id1:","id2:","id3:"],
+            //engine
+    ],
+},
+
+"sb_van_engine_hellcat": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"6.2L V8 HEMI Engine",
+        "value":4000,
+    },
+    "slotType" : "van_engine",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["gavril_v8_van", ["van_engine"], [], {"pos":{"x":0, "y":0, "z":0.015}, "rot":{"x":0, "y":0, "z":0}, "scale":{"x":1, "y":1, "z":1}}],
+    ],
+    "slots": [
+        ["type", "default", "description"]
+        ["van_exhaust_v8","van_exhaust_v8", "Exhaust"],
+        ["van_transmission","van_transmission_6A", "Transmission"],
+        ["van_enginetuning","sb_van_enginetuning_stock", "Engine Tuning"],
+    ],
+    "powertrain" : [
+        ["type", "name", "inputName", "inputIndex"],
+        ["combustionEngine", "mainEngine", "dummy", 0],
+    ],
+    "mainEngine": {
+        "torque":[
+          ["rpm", "torque"]
+          [0, 0],
+          [500, 614],
+          [1000, 683],
+          [2000, 802],
+          [3000, 891],
+          [4000, 844],
+          [5000, 799],
+          [6000, 754],
+          [7000, 701],
+          [8000, 659]
+        ],
+
+        //engine performance
+        "idleRPM":850,
+        "maxRPM":6600,
+        "inertia":0.26,
+        "friction":19,
+        "dynamicFriction":0.035,
+        "burnEfficiency":0.21,
+        "torqueReactionNodes:":["e1l","e2l","e4r"],
+        "particulates":0.052,
+        "energyStorage": "mainTank",
+        "requiredEnergyType":"gasoline",
+
+        //cooling and oil system
+        "thermalsEnabled":true,
+        "engineBlockMaterial":"aluminum",
+        "oilVolume":8,
+
+        //engine durability
+        "cylinderWallTemperatureDamageThreshold":160,
+        "headGasketDamageThreshold":1500000,
+        "pistonRingDamageThreshold":1500000,
+        "connectingRodDamageThreshold":2000000,
+
+        //node beam interface
+        "waterDamage": {"[engineGroup]:":["engine_intake"]},
+        "radiator": {"[engineGroup]:":["radiator"]},
+        "engineBlock": {"[engineGroup]:":["engine_block"]},
+        "breakTriggerBeam":"engine",
+        
+        "soundConfig": "soundConfig",
+    },
+    "soundConfig": {
+        "sampleName": "V8_2",
+        "mainGain": -18,
+        "maxLoadMix": 0.6,
+        "minLoadMix": 0,
+        "onLoadGain":1,
+        "offLoadGain":0.65,
+        "eqLowGain": -3,
+        "eqLowFreq": 150,
+        //"eqLowWidth": 0,
+        "eqHighGain": -5,
+        "eqHighFreq": 6000,
+        //"eqHighWidth": 0,
+        //"eqFundamentalGain": -15,
+    },
+    "vehicleController": {
+        "clutchLaunchStartRPM":1600,
+        "clutchLaunchTargetRPM":2200,
+        //**highShiftDown can be overwritten by automatic transmissions**
+        "highShiftDownRPM":[0,0,0,2600,2850,3050,3150,3150],
+        //**highShiftUp can be overwritten by intake modifications**
+        "highShiftUpRPM":6500
+    },
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"selfCollision":false}
+         {"collision":true}
+         //--4.5L V8 Engine-
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+         {"nodeWeight":28},
+         {"group":"van_engine"},
+         {"engineGroup":"engine_block"}
+         ["e1r", -0.13, -1.14, 0.43,{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.1,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":500,"conductionRadius":0.2}],
+         ["e1l", 0.13, -1.14, 0.43,{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.1,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":500,"conductionRadius":0.2}],
+         ["e2r", -0.13, -1.68, 0.43],
+         ["e2l", 0.13, -1.68, 0.43],
+         {"engineGroup":["engine_block","engine_intake"]}
+         ["e3r", -0.32, -1.14, 0.9],
+         ["e3l", 0.32, -1.14, 0.9],
+         ["e4r", -0.32, -1.68, 0.9{"isExhaust":true}],
+         ["e4l", 0.32, -1.68, 0.9],
+		 {"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"smokePoint":false,"selfIgnitionCoef":false,"baseTemp":false,"conductionRadius":false},
+         {"engineGroup":""}
+
+         {"group":""},
+    ],
+
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          //--ENGINE CUBE--
+          {"beamSpring":12600840,"beamDamp":390},
+          {"beamDeform":142500,"beamStrength":"FLT_MAX"},
+          ["e1r","e1l"],
+          ["e1r","e2r"],
+          ["e1r","e2l"],
+          ["e1r","e3r"],
+          ["e1r","e3l"],
+          ["e1r","e4r"{"isExhaust":true}],
+          ["e1r","e4l"],
+          ["e1l","e2r"],
+          ["e1l","e2l"],
+          ["e1l","e3r"],
+          ["e1l","e3l"],
+          ["e1l","e4r"],
+          ["e1l","e4l"],
+          ["e2r","e2l"],
+          ["e2r","e3r"],
+          ["e2r","e3l"],
+          ["e2r","e4r"],
+          ["e2r","e4l"],
+          ["e2l","e3r"],
+          ["e2l","e3l"],
+          ["e2l","e4r"],
+          ["e2l","e4l"],
+          ["e3r","e3l"],
+          ["e3r","e4r"],
+          ["e3r","e4l"],
+          ["e3l","e4r"],
+          ["e3l","e4l"],
+          ["e4r","e4l"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+    "triangles": [
+            ["id1:","id2:","id3:"],
+            //engine
+    ],
+},
+
+"sb_van_enginetuning_stock": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Stock Engine Tuning",
+        "value":0,
+    },
+    "slotType" : "van_enginetuning",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["van_intake_stock", ["van_engine","van_framecab"]],
+    ],
+
+},
+
+"sb_van_enginetuning_v8_hellcat": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Hellcat Supercharger",
+        "value":4000,
+    },
+    "supercharger": {
+        "gearRatio":1.5,
+        "clutchEngageRPM":0,
+        "pressureRatePSI":500,
+        "pressurePSIPer1kRPM":2.13,
+        "crankLossPer1kRPM":0.05,
+        "type":"roots",
+        "lobes":2,
+        "twistedLobes":false,
+        "boostController":[
+            //throttle in %, factor
+            [0,     0.2],
+            [100,     1],
+        ],
+    },
+    "mainEngine": {
+        //engine performance
+        "idleRPM":950,
+        "maxRPM":6600,
+        "burnEfficiency":0.21,
+        //supercharger name
+        "supercharger":"supercharger",
+    },
+    "slotType" : "van_enginetuning",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["van_intake_stock", ["van_engine","van_framecab"]],
+    ],
+
+},
+"sb_van_radiator_super": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Super Duty Radiator",
+        "value":150,
+    },
+    "slotType" : "van_radiator",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["van_radiator", ["van_framefront", "van_cab", "van_frontmeat"]],
+    ],
+    "mainEngine":{
+        //cooling system
+        "radiatorArea":0.5,
+        "radiatorEffectiveness":30000,
+        "coolantVolume":20,
+        "radiatorFanType":"electric",
+        "radiatorFanTemperature":105,
+        "radiatorFanMaxAirSpeed":3,
+        "thermostatTemperature":90
+    },
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          {"beamSpring":501000,"beamDamp":50},
+          {"beamDeform":5000,"beamStrength":"FLT_MAX"},
+          //radiator shape
+          {"deformGroup":"radiator_damage","deformationTriggerRatio":0.02},
+          ["f1r","fr5l"],
+          ["f1l","fr5r"],
+          //radiator crush
+          {"beamType":"|SUPPORT", "beamLongBound":1.0},
+          ["fr5r","fr6r"],
+          ["fr5r","fr6r"],
+          ["fr5","fr6"],
+          ["f1r","f3r"],
+          ["f1r","f3"],
+          ["f1","f3l"],
+          {"deformGroup":""}
+    ],
+},
+}

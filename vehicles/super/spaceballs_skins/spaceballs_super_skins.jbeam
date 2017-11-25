@@ -1,0 +1,11 @@
+{
+"sb_super_skin_scuderiabolide_group2": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Scuderia Bolide Group 2",
+        "value":1300,
+    },
+    "slotType" : "paint_design",
+    "globalSkin" : "sb_scuderiabolide_group2",
+}
+}

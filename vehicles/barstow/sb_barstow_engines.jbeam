@@ -1,0 +1,105 @@
+{
+"sb_barstow_supercharger_variable_423": {
+    "information":{
+        "authors":"Spaceballs the Username",
+        "name":"Variable Race Supercharger",
+        "value":9000,
+    },
+    "slotType" : "barstow_intake_v8_423",
+    "variables": [
+        ["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
+        ["$gearRatio", "range", ":1", "Supercharger", 1.8, 0.5, 3, "Gear Ratio", ""{"stepDis":0.1}]
+        ["$pressureRate", "range", "psi/s", "Supercharger", 500, 200, 1000, "Pressure Rate", ""{"stepDis":25}]
+        ["$pressurePSI", "range", "psi", "Supercharger", 3, 0.5, 8, "Pressure Rate", ""{"stepDis":0.5}]
+    ],
+    "supercharger": {
+        "gearRatio":"$gearRatio",
+        "clutchEngageRPM":0,
+        "pressureRatePSI":"$pressureRate",
+        "pressurePSIPer1kRPM":"$pressurePSI",
+        "crankLossPer1kRPM":0.05,
+        "type":"roots",
+        "lobes":4,
+        "twistedLobes":true,
+        "boostController":[
+            //throttle in %, factor
+            [0,     0.2],
+            [100,     1],
+        ],
+    },
+    "mainEngine":{
+        "maxRPM":6100,
+        "burnEfficiency":0.21,
+        "cylinderWallTemperatureDamageThreshold":180,
+
+        //supercharger name
+        "supercharger":"supercharger",
+    },
+    "vehicleController": {
+        "highShiftUpRPM":5800,
+    },
+    "flexbodies": [
+        ["mesh", "[group]:", "nonFlexMaterials"],
+        ["barstow_supercharger_stage2", ["barstow_engine"]],
+    ],
+    "props": [
+        ["func"      , "mesh"              , "idRef:", "idX:", "idY:"            , "baseRotation"        , "rotation"                 , "translation"        , "min", "max", "offset", "multiplier"]
+        ["throttle"     ,"barstow_supercharger_throttle", "sch1r","sch1l","sch2r",  {"x":90, "y":0, "z":0} , {"x":-90, "y":0, "z":0}    , {"x":0.0, "y":0, "z":0}, 0, 1, 0, 1],
+    ],
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+         {"selfCollision":true},
+         {"collision":true}
+         {"nodeWeight":5.34},
+         {"engineGroup":"engine_intake"}
+         ["sch1r",-0.18, -1.42, 1.10],
+         ["sch1l", 0.18, -1.42, 1.10],
+         ["sch2r",-0.18, -1.00, 1.10],
+         ["sch2l", 0.18, -1.00, 1.10],
+         {"engineGroup":""}
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          {"beamSpring":1660830,"beamDamp":168},
+          {"beamDeform":52650,"beamStrength":"FLT_MAX"},
+          //supercharger
+          ["sch1r","sch1l"],
+          ["sch2r","sch2l"],
+          ["sch1r","sch2r"],
+          ["sch1l","sch2l"],
+          ["sch2r","sch1l"],
+          ["sch2l","sch1r"],
+
+          {"beamDeform":36450,"beamStrength":"FLT_MAX"},
+          //attach to engine
+          ["sch1r","e3r"],
+          ["sch1r","e3l"],
+          ["sch1r","e4r"],
+          ["sch1r","e4l"],
+          ["sch1l","e3r"],
+          ["sch1l","e3l"],
+          ["sch1l","e4r"],
+          ["sch1l","e4l"],
+          ["sch2r","e3r"],
+          ["sch2r","e3l"],
+          ["sch2r","e4r"],
+          ["sch2r","e4l"],
+          ["sch2l","e3r"],
+          ["sch2l","e3l"],
+          ["sch2l","e4r"],
+          ["sch2l","e4l"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+    "triangles": [
+            ["id1:","id2:","id3:"],
+            {"group":"barstow_supercharger"},
+            ["sch1r","sch1l","sch2l"],
+            ["sch1r","sch2l","sch2r"],
+            {"group":""},
+    ],
+}
+}

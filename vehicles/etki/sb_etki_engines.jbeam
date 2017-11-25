@@ -1,0 +1,168 @@
+{
+  "sb_etki_engine_3.0_tuned": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"Tuned 3.0L I6 Engine",
+          "value":3200,
+      },
+      "slotType" : "etki_engine",
+      "slots": [
+          ["type", "default", "description"]
+          ["etki_transmission","etki_transmission_5M", "Transmission"],
+          ["etki_intake_3.0","etki_intake_3.0", "Intake",{"coreSlot":true}],
+          ["etki_exhaust","etki_exhaust", "Exhaust"],
+      ],
+      "powertrain": [
+          ["type", "name", "inputName", "inputIndex"],
+          ["combustionEngine", "mainEngine", "dummy", 0],
+      ],
+      "mainEngine": {
+          "torque":[
+            ["rpm", "torque"]
+            [0, 0],
+            [500, 101],
+            [1000, 199],
+            [2000, 280],
+            [2700, 303],
+            [3300, 325],
+            [4000, 336],
+            [4500, 340],
+            [5000, 342],
+            [6000, 338],
+            [7000, 326],
+            [8000, 303],
+          ],
+
+          "idleRPM":950,
+          "maxRPM":6500,
+          "inertia":0.18,
+          "friction":16,
+          "dynamicFriction":0.023,
+          "burnEfficiency":0.31,
+          "torqueReactionNodes:":["e1l","e2l","e4r"],
+          "particulates":0.04,
+          "energyStorage": "mainTank",
+          "requiredEnergyType":"gasoline",
+
+          //"clutchTorque":360,
+
+          //cooling and oil system
+          "thermalsEnabled":true,
+          "engineBlockMaterial":"aluminum",
+          "oilVolume":5,
+
+          //engine durability
+          "cylinderWallTemperatureDamageThreshold":145,
+          "headGasketDamageThreshold":1500000,
+          "pistonRingDamageThreshold":1500000,
+          "connectingRodDamageThreshold":2000000,
+
+          //node beam interface
+          "waterDamage": {"[engineGroup]:":["engine_intake"]},
+          "radiator": {"[engineGroup]:":["radiator"]},
+          "engineBlock": {"[engineGroup]:":["engine_block"]},
+          "breakTriggerBeam":"engine",
+      
+          "soundConfig": "soundConfig",
+        },
+        "soundConfig": {
+            "sampleName": "L6",
+            "mainGain": 5,
+            "onLoadGain":1,
+            "offLoadGain":0.75,
+            "maxLoadMix": 0.7,
+            "minLoadMix": 0.0,
+            "eqLowGain": -10,
+            "eqLowFreq": 75,
+            "eqLowWidth": 0.1,
+            "eqHighGain": -8,
+            "eqHighFreq": 350,
+            "eqHighWidth": 0.1,
+            "fundamentalFrequencyCylinderCount":6
+            "eqFundamentalGain": -10
+        },
+      "vehicleController": {
+          "clutchLaunchStartRPM":2000,
+          "clutchLaunchTargetRPM":2600,
+          //**highShiftDown can be overwritten by automatic transmissions**
+          "highShiftDownRPM":[0,0,0,2800,3200,3300,3400,3400],
+          //**highShiftUp can be overwritten by intake modifications**
+          "highShiftUpRPM":6100
+      },
+      "flexbodies": [
+          ["mesh", "[group]:", "nonFlexMaterials"],
+          ["etki_engine", ["etki_engine"],[]{"pos":{"x":0,"y":0,"z":0}}],
+      ],
+      "nodes": [
+           ["id", "posX", "posY", "posZ"],
+           {"frictionCoef":0.5},
+           {"nodeMaterial":"|NM_METAL"},
+           {"selfCollision":false},
+           {"collision":true}
+           {"group":"etki_engine"},
+           {"nodeWeight":24},
+           {"engineGroup":"engine_block"}
+           {"chemEnergy":2000,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":500,"conductionRadius":0.15},
+           ["e1r", -0.11, -1.0, 0.22],
+           ["e1l", 0.11, -1.0, 0.22],
+           ["e2r", -0.11, -1.59, 0.22],
+           ["e2l", 0.11, -1.59, 0.22],
+           {"engineGroup":["engine_block","engine_intake"]}
+           ["e3r", -0.24, -1.0, 0.69],
+           ["e3l", 0.05, -1.0, 0.75],
+           ["e4r", -0.24, -1.59, 0.69{"isExhaust":true}],
+           ["e4l", 0.05, -1.59, 0.75],
+           {"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false},
+           {"engineGroup":""}
+           {"group":""},
+      ],
+      "beams": [
+            ["id1:", "id2:"],
+            {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+            {"beamSpring":8400600,"beamDamp":150},
+            {"beamDeform":540000,"beamStrength":"FLT_MAX"},
+            //engine
+            ["e1r","e1l"],
+            ["e2r","e2l"],
+            ["e3r","e3l"],
+            ["e4r","e4l"],
+
+            ["e1r","e2r"],
+            ["e1l","e2l"],
+            ["e3r","e4r"],
+            ["e3l","e4l"],
+
+            ["e1r","e3r"],
+            ["e1l","e3l"],
+            ["e2r","e4r"],
+            ["e2l","e4l"],
+
+            ["e2r","e3r"],
+            ["e2l","e3l"],
+            ["e2r","e3l"],
+            ["e2l","e3r"],
+
+            ["e1r","e4r"{"isExhaust":true}],
+            ["e1l","e4l"],
+            ["e1r","e4l"],
+            ["e1l","e4r"],
+
+            ["e1r","e2l"],
+            ["e1l","e2r"],
+            ["e3r","e4l"],
+            ["e3l","e4r"],
+  
+
+            {"beamSpring":60600,"beamDamp":50},
+            {"beamDeform":1000,"beamStrength":2000},
+            //rad tube beams
+            {"breakGroup":"radtube"},
+            ["e3r","f15l"],
+            ["e3r","f15"],
+            ["e3r","f15l"],
+            ["e3r","f15"],
+            {"breakGroup":""},
+            {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+      ],
+  }
+}

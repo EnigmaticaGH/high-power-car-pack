@@ -1,0 +1,38 @@
+{
+  "sb_etki_skin_rush": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"Rush Livery",
+          "value":1300,
+      },
+      "slotType" : "paint_design",
+      "globalSkin" : "sb_rush",
+  },
+  "sb_etki_skin_valor": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"Team Valor Livery",
+          "value":1300,
+      },
+      "slotType" : "paint_design",
+      "globalSkin" : "sb_valor",
+  },
+  "sb_etki_skin_mystic": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"Team Mystic Livery",
+          "value":1300,
+      },
+      "slotType" : "paint_design",
+      "globalSkin" : "sb_mystic",
+  },
+  "sb_etki_skin_instinct": {
+      "information":{
+          "authors":"Spaceballs the Username",
+          "name":"Team Instinct Livery",
+          "value":1300,
+      },
+      "slotType" : "paint_design",
+      "globalSkin" : "sb_instinct",
+  }
+}

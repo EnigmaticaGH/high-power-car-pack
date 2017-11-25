@@ -1,0 +1,31 @@
+{
+"Performance Class":"8",
+"Drivetrain":"RWD",
+"0-300 km/h":31.8,
+"100-200 km/h":7.1,
+"0-100 km/h":4.8,
+"Value":88000,
+"0-200 km/h":11.8,
+"TorquePeakRPM":"4600 - 6700",
+"Transmission":"Manual",
+"Description":"High performance drift-oriented model with unique Rush paintjob",
+"Configuration":"Drift (M)",
+"0-100 mph":9,
+"Weight":1490,
+"60-100 mph":4.4,
+"0-60 mph":4.6,
+"Config Type":"Custom",
+"100-0 km/h":37.7,
+"PowerPeakRPM":6250,
+"Power":763.183,
+"Torque":842.397,
+"default_color":"Pearl White",
+"Off-Road Score":25,
+"Weight/Power":1.95282,
+"60-0 mph":114.9,
+"Years":{
+  "min":1987,
+  "max":1989
+},
+"Top Speed":87.5742
+}
